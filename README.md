@@ -21,7 +21,7 @@ __As informações que precisamos são:__
 ## Requisitos
 - Typescript
 - React
-- Sinta-se livre para escolher o [layout](https://www.google.com/search?q=pokedex+web&tbm=isch) que quiser. Lembre-se que iremos avaliar seu html e seu css).
+- Sinta-se livre para escolher o [layout](https://www.google.com/search?q=pokedex+web&tbm=isch) que quiser. Lembre-se que iremos avaliar seu html e seu css.
 
 Só isso mesmo =]
 

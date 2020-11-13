@@ -8,14 +8,8 @@ declare module 'styled-components' {
 			secundary: string
 			tertiary: string
 			quartenary: string
-			quinary: string
-			senary: string
-			septenary: string
-			octonary: string
-			nonary: string
-			denary: string
-			background: string
 			white: string
+			black: string
 			messages: {
 				info: string
 				success: string

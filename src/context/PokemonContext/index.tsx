@@ -5,7 +5,7 @@ import React, {
 	useEffect,
 	useState,
 } from 'react'
-import queryString from 'query-string'
+import { parse } from 'query-string'
 
 import { pokeApi } from '../../services/apiClients'
 
@@ -59,65 +59,69 @@ export const PokemonProvider: React.FC = ({ children }) => {
 				async (pokemonUrlReponse: PokemonUrlResponse) => {
 					const responsePokemon = await pokeApi.get(pokemonUrlReponse.url)
 
-					const responseSpecies = await pokeApi.get(
-						responsePokemon.data.species.url
-					)
+					const { name, sprites, species, types, stats } = responsePokemon.data
+
+					const responseSpecies = await pokeApi.get(species.url)
 
 					const responseEvolutionChain = await pokeApi.get(
 						responseSpecies.data.evolution_chain.url
 					)
 
-					const serializedTypes = responsePokemon.data.types.map(
-						(type: Type, index: number) => ({
-							...type,
-							id: index,
-						})
-					)
+					const serializedTypes = types.map((type: Type) => ({
+						slot: type.slot,
+						type: type.type,
+					}))
 
-					const serializedStats = responsePokemon.data.stats.map(
-						(stat: Stat, index: number) => ({
-							...stat,
-							id: index,
-						})
-					)
+					const serializedStats = stats.map((stat: Stat) => ({
+						base_stat: stat.base_stat,
+						effort: stat.effort,
+						stat: stat.stat,
+					}))
 
 					return {
-						...responsePokemon.data,
+						name,
 						types: serializedTypes,
 						stats: serializedStats,
-						image: responsePokemon.data.sprites.front_default,
+						image: sprites.front_default,
 						canEvolve: !!responseEvolutionChain.data.chain.evolves_to.length,
 					}
 				}
 			)
 		)
 
-		const parsedParams = queryString.parse(pokemonsUrlsResponse.data.next)
+		const parsedParams = parse(pokemonsUrlsResponse.data.next)
 
 		const [offset, limit] = Object.values(parsedParams).map(
-			param => (param as string) || undefined
+			param => param as string
 		)
 
-		setData({
-			pokemons: pokemons.concat(fetchedPokemons),
+		setData(state => ({
+			...state,
+			pokemons: [...state.pokemons, ...fetchedPokemons],
 			nextPageParams: {
 				offset,
 				limit,
 			},
-		})
+		}))
 	}, [])
 
 	useEffect(() => {
+		localStorage.removeItem('PokedexVictorFiamoncini:pokemons')
+
 		localStorage.setItem(
 			'PokedexVictorFiamoncini:pokemons',
 			JSON.stringify(pokemons)
 		)
+	}, [pokemons])
+
+	useEffect(() => {
+		localStorage.removeItem('PokedexVictorFiamoncini:nextPageParams')
 
 		localStorage.setItem(
 			'PokedexVictorFiamoncini:nextPageParams',
 			JSON.stringify(nextPageParams)
 		)
-	}, [pokemons, nextPageParams])
+	}, [nextPageParams])
 
 	return (
 		<PokemonContext.Provider value={{ pokemons, nextPageParams, getPokemons }}>

@@ -13,7 +13,7 @@ const Home: React.FC = () => {
 		if (!pokemons.length) {
 			dispatchGetPokemons()
 		}
-	}, [])
+	}, [getPokemons, pokemons.length])
 
 	return (
 		<div style={{ display: 'flex' }}>
@@ -21,19 +21,19 @@ const Home: React.FC = () => {
 				{nextPageParams.limit} - {nextPageParams.offset}
 			</div>
 			<button onClick={async () => getPokemons(nextPageParams)}>More</button>
-			{pokemons.map(pokemon => (
-				<div key={pokemon.id}>
+			{pokemons.map((pokemon, index) => (
+				<div key={index}>
 					<img src={pokemon.image} alt={pokemon.name} />
 					<p>{pokemon.name}</p>
 					<p>Pode evoluir: {pokemon.canEvolve ? 'Sim' : 'Não'}</p>
 					<div>
-						{pokemon.types.map(type => (
-							<p key={type.id}>{type.type.name}</p>
+						{pokemon.types.map((type, index) => (
+							<p key={index}>{type.type.name}</p>
 						))}
 					</div>
 					<div>
-						{pokemon.stats.map(stat => (
-							<p key={stat.id}>
+						{pokemon.stats.map((stat, index) => (
+							<p key={index}>
 								{stat.stat.name}: {stat.base_stat}
 							</p>
 						))}

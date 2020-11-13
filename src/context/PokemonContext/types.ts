@@ -13,7 +13,6 @@ export interface NextPageParams {
 }
 
 export interface Type {
-	id: number
 	slot: number
 	type: {
 		name: string
@@ -21,7 +20,6 @@ export interface Type {
 }
 
 export interface Stat {
-	id: number
 	base_stat: number
 	effort: number
 	stat: {
@@ -30,7 +28,6 @@ export interface Stat {
 }
 
 export interface Pokemon {
-	id: string
 	name: string
 	image: string
 	types: Type[]

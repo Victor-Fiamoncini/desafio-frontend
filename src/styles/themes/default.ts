@@ -1,18 +1,12 @@
 export default {
 	title: 'default',
 	colors: {
-		primary: '#ff9000',
+		primary: '#ea2224',
 		secundary: '#3e3b47',
 		tertiary: '#f4ede8',
 		quartenary: '#232129',
-		quinary: '#999591',
-		senary: '#28262e',
-		septenary: '#c53030',
-		octonary: '#666360',
-		nonary: '#04d361',
-		denary: '',
-		background: '#312e38',
 		white: '#fff',
+		black: '#000',
 		messages: {
 			info: '#3172b7',
 			success: '#2e656a',

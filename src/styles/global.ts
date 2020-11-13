@@ -11,7 +11,7 @@ export default createGlobalStyle`
 	}
 
 	body {
-		background: ${props => props.theme.colors.background};
+		background: ${props => props.theme.colors.black};
 		color: ${props => props.theme.colors.white};
 		-webkit-font-smoothing: antialiased;
 	}
@@ -31,7 +31,8 @@ export default createGlobalStyle`
   }
 
   ol,
-  ul {
+  ul,
+	li {
     list-style: none;
   }
 `

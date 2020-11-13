@@ -1,7 +1,14 @@
 import React from 'react'
 
-const App: React.FC = () => {
-  return <div></div>
-}
+import AppProvider from './context'
+import Routes from './routes'
+import GlobalStyle from './styles/global'
+
+const App: React.FC = () => (
+	<AppProvider>
+		<Routes />
+		<GlobalStyle />
+	</AppProvider>
+)
 
 export default App

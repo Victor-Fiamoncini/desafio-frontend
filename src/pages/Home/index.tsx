@@ -1,19 +1,26 @@
 import React, { useEffect } from 'react'
+
 import { usePokemon } from '../../context/PokemonContext'
 
 const Home: React.FC = () => {
-	const { getPokemons, pokemons } = usePokemon()
+	const { getPokemons, pokemons, nextPageParams } = usePokemon()
 
 	useEffect(() => {
 		async function dispatchGetPokemons() {
-			await getPokemons({ limit: 12 })
+			await getPokemons({ limit: '4' })
 		}
 
-		dispatchGetPokemons()
+		if (!pokemons.length) {
+			dispatchGetPokemons()
+		}
 	}, [])
 
 	return (
-		<div>
+		<div style={{ display: 'flex' }}>
+			<div>
+				{nextPageParams.limit} - {nextPageParams.offset}
+			</div>
+			<button onClick={async () => getPokemons(nextPageParams)}>More</button>
 			{pokemons.map(pokemon => (
 				<div key={pokemon.id}>
 					<img src={pokemon.image} alt={pokemon.name} />

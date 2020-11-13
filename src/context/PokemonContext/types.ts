@@ -3,13 +3,13 @@ export interface PokemonUrlResponse {
 }
 
 export interface GetPokemonOptions {
-	limit?: number
-	offset?: number
+	limit?: string
+	offset?: string
 }
 
 export interface NextPageParams {
-	limit?: number
-	offset?: number
+	limit?: string
+	offset?: string
 }
 
 export interface Type {

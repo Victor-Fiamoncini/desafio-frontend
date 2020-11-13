@@ -5,6 +5,7 @@ import React, {
 	useEffect,
 	useState,
 } from 'react'
+import queryString from 'query-string'
 
 import { pokeApi } from '../../services/apiClients'
 
@@ -37,6 +38,14 @@ export const PokemonProvider: React.FC = ({ children }) => {
 			initialState.pokemons = JSON.parse(storagedPokemons)
 		}
 
+		const storagedNextPageParams = localStorage.getItem(
+			'PokedexVictorFiamoncini:nextPageParams'
+		)
+
+		if (storagedNextPageParams) {
+			initialState.nextPageParams = JSON.parse(storagedNextPageParams)
+		}
+
 		return initialState
 	})
 
@@ -45,7 +54,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
 	const getPokemons = useCallback(async (params: GetPokemonOptions) => {
 		const pokemonsUrlsResponse = await pokeApi.get('/pokemon', { params })
 
-		const pokemons: Pokemon[] = await Promise.all(
+		const fetchedPokemons: Pokemon[] = await Promise.all(
 			pokemonsUrlsResponse.data.results.map(
 				async (pokemonUrlReponse: PokemonUrlResponse) => {
 					const responsePokemon = await pokeApi.get(pokemonUrlReponse.url)
@@ -83,7 +92,19 @@ export const PokemonProvider: React.FC = ({ children }) => {
 			)
 		)
 
-		setData({ ...data, pokemons })
+		const parsedParams = queryString.parse(pokemonsUrlsResponse.data.next)
+
+		const [offset, limit] = Object.values(parsedParams).map(
+			param => (param as string) || undefined
+		)
+
+		setData({
+			pokemons: pokemons.concat(fetchedPokemons),
+			nextPageParams: {
+				offset,
+				limit,
+			},
+		})
 	}, [])
 
 	useEffect(() => {
@@ -91,7 +112,12 @@ export const PokemonProvider: React.FC = ({ children }) => {
 			'PokedexVictorFiamoncini:pokemons',
 			JSON.stringify(pokemons)
 		)
-	}, [pokemons])
+
+		localStorage.setItem(
+			'PokedexVictorFiamoncini:nextPageParams',
+			JSON.stringify(nextPageParams)
+		)
+	}, [pokemons, nextPageParams])
 
 	return (
 		<PokemonContext.Provider value={{ pokemons, nextPageParams, getPokemons }}>

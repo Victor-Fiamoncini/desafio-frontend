@@ -1,5 +1,5 @@
 declare namespace NodeJS {
-  export interface ProcessEnv {
-    readonly POKEAPI_URL: string
-  }
+	export interface ProcessEnv {
+		readonly REACT_APP_POKEAPI_URL: string
+	}
 }

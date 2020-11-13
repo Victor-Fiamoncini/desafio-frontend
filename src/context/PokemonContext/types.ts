@@ -7,7 +7,13 @@ export interface GetPokemonOptions {
 	offset?: number
 }
 
+export interface NextPageParams {
+	limit?: number
+	offset?: number
+}
+
 export interface Type {
+	id: number
 	slot: number
 	type: {
 		name: string
@@ -15,6 +21,7 @@ export interface Type {
 }
 
 export interface Stat {
+	id: number
 	base_stat: number
 	effort: number
 	stat: {
@@ -33,11 +40,11 @@ export interface Pokemon {
 
 export interface PokemonState {
 	pokemons: Pokemon[]
-	nextPageUrl: string
+	nextPageParams: NextPageParams
 }
 
 export interface PokemonContextData {
 	pokemons: Pokemon[]
-	nextPageUrl: string
+	nextPageParams: NextPageParams
 	getPokemons(params: GetPokemonOptions): Promise<void>
 }

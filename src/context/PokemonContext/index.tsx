@@ -14,6 +14,8 @@ import {
 	PokemonContextData,
 	PokemonState,
 	PokemonUrlResponse,
+	Stat,
+	Type,
 } from './types'
 
 const PokemonContext = createContext<PokemonContextData>(
@@ -24,7 +26,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
 	const [data, setData] = useState<PokemonState>(() => {
 		const initialState: PokemonState = {
 			pokemons: [],
-			nextPageUrl: '',
+			nextPageParams: {},
 		}
 
 		const storagedPokemons = localStorage.getItem(
@@ -38,7 +40,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
 		return initialState
 	})
 
-	const { pokemons, nextPageUrl } = data
+	const { pokemons, nextPageParams } = data
 
 	const getPokemons = useCallback(async (params: GetPokemonOptions) => {
 		const pokemonsUrlsResponse = await pokeApi.get('/pokemon', { params })
@@ -48,20 +50,40 @@ export const PokemonProvider: React.FC = ({ children }) => {
 				async (pokemonUrlReponse: PokemonUrlResponse) => {
 					const responsePokemon = await pokeApi.get(pokemonUrlReponse.url)
 
-					console.log(responsePokemon.data)
+					const responseSpecies = await pokeApi.get(
+						responsePokemon.data.species.url
+					)
+
+					const responseEvolutionChain = await pokeApi.get(
+						responseSpecies.data.evolution_chain.url
+					)
+
+					const serializedTypes = responsePokemon.data.types.map(
+						(type: Type, index: number) => ({
+							...type,
+							id: index,
+						})
+					)
+
+					const serializedStats = responsePokemon.data.stats.map(
+						(stat: Stat, index: number) => ({
+							...stat,
+							id: index,
+						})
+					)
 
 					return {
 						...responsePokemon.data,
+						types: serializedTypes,
+						stats: serializedStats,
 						image: responsePokemon.data.sprites.front_default,
+						canEvolve: !!responseEvolutionChain.data.chain.evolves_to.length,
 					}
 				}
 			)
 		)
 
-		setData({
-			...data,
-			pokemons,
-		})
+		setData({ ...data, pokemons })
 	}, [])
 
 	useEffect(() => {
@@ -72,7 +94,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
 	}, [pokemons])
 
 	return (
-		<PokemonContext.Provider value={{ pokemons, nextPageUrl, getPokemons }}>
+		<PokemonContext.Provider value={{ pokemons, nextPageParams, getPokemons }}>
 			{children}
 		</PokemonContext.Provider>
 	)

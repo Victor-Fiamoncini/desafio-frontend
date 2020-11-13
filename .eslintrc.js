@@ -7,6 +7,7 @@ module.exports = {
 		'eslint:recommended',
 		'plugin:react/recommended',
 		'plugin:@typescript-eslint/recommended',
+		'plugin:react-hooks/recommended',
 	],
 	parser: '@typescript-eslint/parser',
 	parserOptions: {
@@ -22,7 +23,6 @@ module.exports = {
 		'linebreak-style': ['error', 'unix'],
 		quotes: ['error', 'single'],
 		semi: ['error', 'never'],
-		'react/prop-types': 0,
-		'react/forbid-prop-types': 0,
+		'react/prop-types': 'off',
 	},
 }

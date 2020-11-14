@@ -3,14 +3,15 @@ import { rem } from 'polished'
 
 export const Container = styled.header`
 	text-align: center;
+	margin-bottom: 40px;
 	img {
-		width: 112px;
-		height: 112px;
-		margin-bottom: 8px;
+		width: 80px;
+		height: 80px;
+		margin-bottom: 10px;
 	}
 	h1 {
 		font-size: ${rem(28)};
-		margin-bottom: 8px;
+		margin-bottom: 10px;
 	}
 	a {
 		display: inline-block;
@@ -18,7 +19,7 @@ export const Container = styled.header`
 		color: ${props => props.theme.colors.primary};
 		&:hover {
 			transition: transform 0.4s;
-			transform: translateX(6px);
+			transform: translateX(4px);
 		}
 	}
 `

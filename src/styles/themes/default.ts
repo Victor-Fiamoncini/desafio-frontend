@@ -7,11 +7,7 @@ export default {
 		quartenary: '#444',
 		white: '#fff',
 		black: '#000',
-		messages: {
-			info: '#3172b7',
-			success: '#2e656a',
-			error: '#c53030',
-		},
+		background: '#fafafa',
 	},
 	fonts: {
 		primary: 'Roboto',

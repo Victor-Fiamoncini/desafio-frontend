@@ -11,7 +11,7 @@ export default createGlobalStyle`
 	}
 
 	body {
-		background: ${props => props.theme.colors.tertiary};
+		background: ${props => props.theme.colors.background};
 		color: ${props => props.theme.colors.secundary};
 		-webkit-font-smoothing: antialiased;
 	}

@@ -10,11 +10,7 @@ declare module 'styled-components' {
 			quartenary: string
 			white: string
 			black: string
-			messages: {
-				info: string
-				success: string
-				error: string
-			}
+			background: string
 		}
 		fonts: {
 			primary: string

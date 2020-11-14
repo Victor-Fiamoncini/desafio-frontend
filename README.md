@@ -1,4 +1,4 @@
-# Pokedex Victor Fiamoncini
+# Pokedex Victor Fiamoncini ![bulbasaur](.github/bulbasaur.png)
 
 Repositório do desafio frontend - pokedex do cantidato Victor Fiamoncini.
 

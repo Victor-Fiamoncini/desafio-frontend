@@ -44,5 +44,6 @@ export interface PokemonState {
 export interface PokemonContextData {
 	pokemons: Pokemon[]
 	nextPageParams: NextPageParams
+	loading: boolean
 	getPokemons(params: GetPokemonOptions): Promise<void>
 }

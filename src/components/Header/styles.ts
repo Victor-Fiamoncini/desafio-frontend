@@ -16,6 +16,7 @@ export const Container = styled.header`
 	a {
 		display: inline-block;
 		font-size: ${rem(16)};
+		font-weight: 600;
 		color: ${props => props.theme.colors.primary};
 		&:hover {
 			transition: transform 0.4s;

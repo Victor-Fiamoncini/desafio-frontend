@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react'
+import { PulseLoader } from 'react-spinners'
+import { useTheme } from 'styled-components'
 
 import { usePokemon } from '../../context/PokemonContext'
 
 import Header from '../../components/Header'
 import PokemonCard from '../../components/PokemonCard'
 
-import { Container } from './styles'
+import { Container, LoadMoreButton } from './styles'
 
 const Home: React.FC = () => {
-	const { getPokemons, pokemons, nextPageParams } = usePokemon()
+	const { getPokemons, pokemons, nextPageParams, loading } = usePokemon()
+	const { colors } = useTheme()
 
 	useEffect(() => {
 		async function dispatchGetPokemons() {
-			await getPokemons({ limit: '4' })
+			await getPokemons({ limit: '8' })
 		}
 
 		if (!pokemons.length) {
@@ -29,21 +32,16 @@ const Home: React.FC = () => {
 				))}
 			</section>
 			<div>
-				<button onClick={async () => getPokemons(nextPageParams)}>
-					Carregar Mais
-				</button>
+				<LoadMoreButton onClick={() => getPokemons(nextPageParams)}>
+					{loading ? (
+						<PulseLoader color={colors.white} size={16} loading={loading} />
+					) : (
+						'Carregar Mais'
+					)}
+				</LoadMoreButton>
 			</div>
 		</Container>
 	)
 }
 
 export default Home
-
-/**
- *
- * 			<div>
-				{nextPageParams.limit} - {nextPageParams.offset}
-			</div>
-
- *
- */

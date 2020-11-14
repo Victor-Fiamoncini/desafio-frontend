@@ -50,7 +50,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
 		return initialState
 	})
 
-	const { pokemons, nextPageParams } = data
+	const { pokemons, nextPageParams, loading } = data
 
 	const getPokemons = useCallback(async (params: GetPokemonOptions) => {
 		setData(state => ({ ...state, loading: true }))
@@ -109,26 +109,28 @@ export const PokemonProvider: React.FC = ({ children }) => {
 		}))
 	}, [])
 
-	useEffect(() => {
-		localStorage.removeItem('PokedexVictorFiamoncini:pokemons')
+	// useEffect(() => {
+	// 	localStorage.removeItem('PokedexVictorFiamoncini:pokemons')
 
-		localStorage.setItem(
-			'PokedexVictorFiamoncini:pokemons',
-			JSON.stringify(pokemons)
-		)
-	}, [pokemons])
+	// 	localStorage.setItem(
+	// 		'PokedexVictorFiamoncini:pokemons',
+	// 		JSON.stringify(pokemons)
+	// 	)
+	// }, [pokemons])
 
-	useEffect(() => {
-		localStorage.removeItem('PokedexVictorFiamoncini:nextPageParams')
+	// useEffect(() => {
+	// 	localStorage.removeItem('PokedexVictorFiamoncini:nextPageParams')
 
-		localStorage.setItem(
-			'PokedexVictorFiamoncini:nextPageParams',
-			JSON.stringify(nextPageParams)
-		)
-	}, [nextPageParams])
+	// 	localStorage.setItem(
+	// 		'PokedexVictorFiamoncini:nextPageParams',
+	// 		JSON.stringify(nextPageParams)
+	// 	)
+	// }, [nextPageParams])
 
 	return (
-		<PokemonContext.Provider value={{ pokemons, nextPageParams, getPokemons }}>
+		<PokemonContext.Provider
+			value={{ pokemons, nextPageParams, loading, getPokemons }}
+		>
 			{children}
 		</PokemonContext.Provider>
 	)

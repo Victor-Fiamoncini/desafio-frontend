@@ -10,9 +10,9 @@ export const Container = styled.main`
 		display: grid;
 		grid-template-columns: repeat(4, 1fr);
 		grid-auto-rows: auto;
-		grid-gap: 10px;
+		grid-gap: 16px;
 		margin-bottom: 20px;
-		padding: 10px;
+		padding: 16px;
 		background: ${props => props.theme.colors.white};
 		border-radius: 8px;
 		box-shadow: 5px 5px 22px #ccc;
@@ -20,21 +20,26 @@ export const Container = styled.main`
 	> div {
 		margin: 40px 0;
 		text-align: center;
-		button {
-			border: none;
-			border-radius: 10px;
-			height: 46px;
-			width: 100%;
-			max-width: 180px;
-			box-shadow: 5px 5px 14px #ccc;
-			background: ${props => props.theme.colors.primary};
-			color: ${props => props.theme.colors.white};
-			font-size: ${rem(18)};
-			font-weight: 600;
-			&:hover {
-				transition: transform 0.6s;
-				transform: translateX(4px);
-			}
-		}
+	}
+`
+
+export const LoadMoreButton = styled.button`
+	margin: 0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 12px 24px;
+	width: 100%;
+	max-width: 180px;
+	border: none;
+	border-radius: 8px;
+	box-shadow: 5px 5px 14px #ccc;
+	background: ${props => props.theme.colors.primary};
+	color: ${props => props.theme.colors.white};
+	font-size: ${rem(18)};
+	font-weight: 600;
+	&:hover {
+		transition: transform 0.4s;
+		transform: translateY(-2px);
 	}
 `

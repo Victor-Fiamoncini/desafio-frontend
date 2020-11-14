@@ -9,6 +9,7 @@ export const Container = styled.div`
 	background: ${props => props.theme.colors.background};
 	border-radius: 8px;
 	padding: 0 8px 8px 8px;
+	box-shadow: 5px 5px 18px ${props => props.theme.colors.tertiary};
 `
 
 export const CanEvolveLabel = styled.span`

@@ -2,9 +2,9 @@ import styled from 'styled-components'
 import { rem } from 'polished'
 
 export const Container = styled.main`
-	padding: 14px 0 0;
+	padding: 14px 10px 0 10px;
 	width: 100%;
-	max-width: 1060px;
+	max-width: 1070px;
 	margin: 0 auto;
 	> section {
 		display: grid;

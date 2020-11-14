@@ -57,7 +57,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
 		setData(state => ({ ...state, loading: true }))
 
 		try {
-			const pokemonsUrlsResponse = await pokeApi.get('/poskemon', { params })
+			const pokemonsUrlsResponse = await pokeApi.get('/pokemon', { params })
 
 			const fetchedPokemons: Pokemon[] = await Promise.all(
 				pokemonsUrlsResponse.data.results.map(

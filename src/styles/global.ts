@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import { rem } from 'polished'
+import 'react-toastify/dist/ReactToastify.css'
 
 export default createGlobalStyle`
 	* {

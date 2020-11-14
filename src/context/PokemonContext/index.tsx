@@ -6,6 +6,7 @@ import React, {
 	useState,
 } from 'react'
 import { parse } from 'query-string'
+import { toast } from 'react-toastify'
 
 import { pokeApi } from '../../services/apiClients'
 
@@ -55,77 +56,85 @@ export const PokemonProvider: React.FC = ({ children }) => {
 	const getPokemons = useCallback(async (params: GetPokemonOptions) => {
 		setData(state => ({ ...state, loading: true }))
 
-		const pokemonsUrlsResponse = await pokeApi.get('/pokemon', { params })
+		try {
+			const pokemonsUrlsResponse = await pokeApi.get('/poskemon', { params })
 
-		const fetchedPokemons: Pokemon[] = await Promise.all(
-			pokemonsUrlsResponse.data.results.map(
-				async (pokemonUrlReponse: PokemonUrlResponse) => {
-					const responsePokemon = await pokeApi.get(pokemonUrlReponse.url)
+			const fetchedPokemons: Pokemon[] = await Promise.all(
+				pokemonsUrlsResponse.data.results.map(
+					async (pokemonUrlReponse: PokemonUrlResponse) => {
+						const responsePokemon = await pokeApi.get(pokemonUrlReponse.url)
 
-					const { name, sprites, species, types, stats } = responsePokemon.data
+						const {
+							name,
+							sprites,
+							species,
+							types,
+							stats,
+						} = responsePokemon.data
 
-					const responseSpecies = await pokeApi.get(species.url)
+						const responseSpecies = await pokeApi.get(species.url)
 
-					const responseEvolutionChain = await pokeApi.get(
-						responseSpecies.data.evolution_chain.url
-					)
+						const responseEvolutionChain = await pokeApi.get(
+							responseSpecies.data.evolution_chain.url
+						)
 
-					const serializedTypes = types.map((type: Type) => ({
-						slot: type.slot,
-						type: type.type,
-					}))
+						const serializedTypes = types.map((type: Type) => ({
+							slot: type.slot,
+							type: type.type,
+						}))
 
-					const serializedStats = stats.map((stat: Stat) => ({
-						base_stat: stat.base_stat,
-						effort: stat.effort,
-						stat: stat.stat,
-					}))
+						const serializedStats = stats.map((stat: Stat) => ({
+							base_stat: stat.base_stat,
+							effort: stat.effort,
+							stat: stat.stat,
+						}))
 
-					return {
-						name,
-						types: serializedTypes,
-						stats: serializedStats,
-						image: sprites.front_default,
-						canEvolve: !!responseEvolutionChain.data.chain.evolves_to.length,
+						return {
+							name,
+							types: serializedTypes,
+							stats: serializedStats,
+							image: sprites.front_default,
+							canEvolve: !!responseEvolutionChain.data.chain.evolves_to.length,
+						}
 					}
-				}
+				)
 			)
-		)
 
-		const parsedParams = parse(pokemonsUrlsResponse.data.next)
+			const parsedParams = parse(pokemonsUrlsResponse.data.next)
 
-		const [offset, limit] = Object.values(parsedParams).map(
-			param => param as string
-		)
+			const [offset, limit] = Object.values(parsedParams).map(
+				param => param as string
+			)
 
-		setData(state => ({
-			...state,
-			pokemons: [...state.pokemons, ...fetchedPokemons],
-			nextPageParams: {
-				offset,
-				limit,
-			},
-			loading: false,
-		}))
+			setData(state => ({
+				...state,
+				pokemons: [...state.pokemons, ...fetchedPokemons],
+				nextPageParams: {
+					offset,
+					limit,
+				},
+				loading: false,
+			}))
+		} catch {
+			toast('Error to fetch pokemons', {
+				type: 'error',
+			})
+		}
 	}, [])
 
-	// useEffect(() => {
-	// 	localStorage.removeItem('PokedexVictorFiamoncini:pokemons')
+	useEffect(() => {
+		localStorage.setItem(
+			'PokedexVictorFiamoncini:pokemons',
+			JSON.stringify(pokemons)
+		)
+	}, [pokemons])
 
-	// 	localStorage.setItem(
-	// 		'PokedexVictorFiamoncini:pokemons',
-	// 		JSON.stringify(pokemons)
-	// 	)
-	// }, [pokemons])
-
-	// useEffect(() => {
-	// 	localStorage.removeItem('PokedexVictorFiamoncini:nextPageParams')
-
-	// 	localStorage.setItem(
-	// 		'PokedexVictorFiamoncini:nextPageParams',
-	// 		JSON.stringify(nextPageParams)
-	// 	)
-	// }, [nextPageParams])
+	useEffect(() => {
+		localStorage.setItem(
+			'PokedexVictorFiamoncini:nextPageParams',
+			JSON.stringify(nextPageParams)
+		)
+	}, [nextPageParams])
 
 	return (
 		<PokemonContext.Provider

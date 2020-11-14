@@ -15,7 +15,7 @@ export const Container = styled.main`
 		padding: 16px;
 		background: ${props => props.theme.colors.white};
 		border-radius: 8px;
-		box-shadow: 5px 5px 22px #ccc;
+		box-shadow: 5px 5px 22px ${props => props.theme.colors.tertiary};
 	}
 	> div {
 		margin: 30px 0;
@@ -33,7 +33,7 @@ export const LoadMoreButton = styled.button`
 	max-width: 180px;
 	border: none;
 	border-radius: 8px;
-	box-shadow: 5px 5px 14px #ccc;
+	box-shadow: 5px 5px 14px ${props => props.theme.colors.tertiary};
 	background: ${props => props.theme.colors.primary};
 	color: ${props => props.theme.colors.white};
 	font-size: ${rem(18)};

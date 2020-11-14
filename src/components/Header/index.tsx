@@ -10,13 +10,13 @@ const Header: React.FC = () => (
 			<img src={pokemonBall} alt="Pokeball" title="PokeAPI" />
 		</a>
 		<div>
-			<h1>Desafio Pokedex</h1>
+			<h1>Pokedex Challenge</h1>
 			<a
 				href="https://github.com/Victor-Fiamoncini"
 				rel="noreferrer"
 				target="_blank"
 			>
-				Por Victor Fiamoncini
+				By Victor Fiamoncini
 			</a>
 		</div>
 	</Container>

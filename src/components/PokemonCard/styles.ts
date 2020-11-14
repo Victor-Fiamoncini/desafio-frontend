@@ -4,21 +4,42 @@ import { rem } from 'polished'
 import { TypeColor } from './types'
 
 export const Container = styled.div`
+	position: relative;
+	overflow: hidden;
 	background: ${props => props.theme.colors.background};
 	border-radius: 8px;
 	padding: 0 8px 8px 8px;
 `
 
+export const CanEvolveLabel = styled.span`
+	position: absolute;
+	top: 0;
+	right: 0;
+	border-color: transparent ${props => props.theme.colors.primary} transparent
+		transparent;
+	border-style: solid;
+	border-width: 0 66px 66px 0;
+	p {
+		position: absolute;
+		transform: rotate(45deg) translateX(28px) translateY(-4px);
+		color: ${props => props.theme.colors.white};
+		font-weight: 600;
+		font-size: ${rem(12)};
+		text-align: center;
+	}
+`
+
 export const ImageContainer = styled.div`
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
+	justify-content: space-between;
 	img {
-		width: 108px;
+		width: 100%;
+		max-width: 108px;
 	}
 	h2 {
 		margin: 0 auto;
-		color: ${props => props.theme.colors.quartenary};
+		color: ${props => props.theme.colors.secundary};
 		font-size: ${rem(18)};
 		font-weight: 600;
 	}

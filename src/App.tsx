@@ -1,4 +1,5 @@
 import React from 'react'
+import { ToastContainer } from 'react-toastify'
 
 import AppProvider from './context'
 import Routes from './routes'
@@ -8,6 +9,7 @@ const App: React.FC = () => (
 	<AppProvider>
 		<Routes />
 		<GlobalStyle />
+		<ToastContainer />
 	</AppProvider>
 )
 

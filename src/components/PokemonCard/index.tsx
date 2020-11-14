@@ -9,17 +9,29 @@ import { Pokemon } from '../../context/PokemonContext/types'
 
 import {
 	Container,
+	CanEvolveLabel,
 	ImageContainer,
 	StatsContainer,
 	TypesContainer,
 	Type,
 } from './styles'
 
-const PokemonCard: React.FC<Pokemon> = ({ name, image, stats, types }) => {
+const PokemonCard: React.FC<Pokemon> = ({
+	name,
+	image,
+	stats,
+	types,
+	canEvolve,
+}) => {
 	const { colors } = useTheme()
 
 	return (
 		<Container>
+			{canEvolve && (
+				<CanEvolveLabel>
+					<p>Evolve</p>
+				</CanEvolveLabel>
+			)}
 			<ImageContainer>
 				<img src={image} alt={name} title={name} />
 				<h2>{capitalize(name)}</h2>
@@ -29,7 +41,7 @@ const PokemonCard: React.FC<Pokemon> = ({ name, image, stats, types }) => {
 					<ul>
 						{stats.map((stat, index) => (
 							<li key={index}>
-								<p>{stat.stat.name}</p>
+								<p>{capitalize(stat.stat.name)}</p>
 								<Line
 									percent={stat.base_stat}
 									strokeWidth={4}

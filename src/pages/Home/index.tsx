@@ -36,7 +36,7 @@ const Home: React.FC = () => {
 					{loading ? (
 						<PulseLoader color={colors.white} size={16} loading={loading} />
 					) : (
-						'Carregar Mais'
+						'Load More'
 					)}
 				</LoadMoreButton>
 			</div>

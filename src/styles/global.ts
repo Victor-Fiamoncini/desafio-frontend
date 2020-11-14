@@ -11,15 +11,15 @@ export default createGlobalStyle`
 	}
 
 	body {
-		background: ${props => props.theme.colors.black};
-		color: ${props => props.theme.colors.white};
+		background: ${props => props.theme.colors.tertiary};
+		color: ${props => props.theme.colors.secundary};
 		-webkit-font-smoothing: antialiased;
 	}
 
 	body,
 	input,
 	button {
-		font-family: ${props => props.theme.fonts.primary}, serif;
+		font-family: ${props => props.theme.fonts.primary}, Helvetica, sans-serif;
 	}
 
 	button {

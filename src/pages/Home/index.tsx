@@ -2,6 +2,10 @@ import React, { useEffect } from 'react'
 
 import { usePokemon } from '../../context/PokemonContext'
 
+import Header from '../../components/Header'
+
+import { Container } from './styles'
+
 const Home: React.FC = () => {
 	const { getPokemons, pokemons, nextPageParams } = usePokemon()
 
@@ -16,8 +20,22 @@ const Home: React.FC = () => {
 	}, [getPokemons, pokemons.length])
 
 	return (
-		<div style={{ display: 'flex' }}>
-			<div>
+		<Container>
+			<Header />
+		</Container>
+	)
+}
+
+export default Home
+
+/**
+ *
+ * 			<div>
+				{nextPageParams.limit} - {nextPageParams.offset}
+			</div>
+			<button onClick={async () => getPokemons(nextPageParams)}>More</button>
+
+ * <div>
 				{nextPageParams.limit} - {nextPageParams.offset}
 			</div>
 			<button onClick={async () => getPokemons(nextPageParams)}>More</button>
@@ -41,7 +59,4 @@ const Home: React.FC = () => {
 				</div>
 			))}
 		</div>
-	)
-}
-
-export default Home
+ */

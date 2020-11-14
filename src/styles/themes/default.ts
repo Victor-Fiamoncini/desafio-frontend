@@ -1,10 +1,10 @@
 export default {
 	title: 'default',
 	colors: {
-		primary: '#ea2224',
-		secundary: '#3e3b47',
-		tertiary: '#f4ede8',
-		quartenary: '#232129',
+		primary: '#f04037',
+		secundary: '#232129',
+		tertiary: '#fbfbfb',
+		quartenary: '#444',
 		white: '#fff',
 		black: '#000',
 		messages: {

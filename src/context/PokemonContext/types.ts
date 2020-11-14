@@ -38,6 +38,7 @@ export interface Pokemon {
 export interface PokemonState {
 	pokemons: Pokemon[]
 	nextPageParams: NextPageParams
+	loading: boolean
 }
 
 export interface PokemonContextData {

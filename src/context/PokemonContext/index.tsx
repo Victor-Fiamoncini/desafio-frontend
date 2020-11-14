@@ -28,6 +28,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
 		const initialState: PokemonState = {
 			pokemons: [],
 			nextPageParams: {},
+			loading: false,
 		}
 
 		const storagedPokemons = localStorage.getItem(
@@ -52,6 +53,8 @@ export const PokemonProvider: React.FC = ({ children }) => {
 	const { pokemons, nextPageParams } = data
 
 	const getPokemons = useCallback(async (params: GetPokemonOptions) => {
+		setData(state => ({ ...state, loading: true }))
+
 		const pokemonsUrlsResponse = await pokeApi.get('/pokemon', { params })
 
 		const fetchedPokemons: Pokemon[] = await Promise.all(
@@ -102,6 +105,7 @@ export const PokemonProvider: React.FC = ({ children }) => {
 				offset,
 				limit,
 			},
+			loading: false,
 		}))
 	}, [])
 

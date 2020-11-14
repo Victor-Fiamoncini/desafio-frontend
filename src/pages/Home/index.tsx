@@ -15,7 +15,7 @@ const Home: React.FC = () => {
 
 	useEffect(() => {
 		async function dispatchGetPokemons() {
-			await getPokemons({ limit: '8' })
+			await getPokemons({ limit: '6' })
 		}
 
 		if (!pokemons.length) {

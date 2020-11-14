@@ -1,3 +1,7 @@
+interface PokemonTypeColors {
+	[key: string]: string
+}
+
 export default {
 	normal: '#A8A878',
 	fightning: '#C03028',
@@ -18,4 +22,4 @@ export default {
 	dark: '#705848',
 	fairy: '#EE99AC',
 	default: '#68A090',
-}
+} as PokemonTypeColors

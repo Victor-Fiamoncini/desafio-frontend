@@ -2,23 +2,23 @@ import styled from 'styled-components'
 import { rem } from 'polished'
 
 export const Container = styled.main`
-	padding: 6px 0;
+	padding: 14px 0 0;
 	width: 100%;
 	max-width: 1060px;
 	margin: 0 auto;
 	> section {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(3, 1fr);
 		grid-auto-rows: auto;
 		grid-gap: 16px;
-		margin-bottom: 20px;
+		margin-bottom: 12px;
 		padding: 16px;
 		background: ${props => props.theme.colors.white};
 		border-radius: 8px;
 		box-shadow: 5px 5px 22px #ccc;
 	}
 	> div {
-		margin: 40px 0;
+		margin: 30px 0;
 		text-align: center;
 	}
 `

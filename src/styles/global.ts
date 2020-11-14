@@ -14,6 +14,18 @@ export default createGlobalStyle`
 		background: ${props => props.theme.colors.background};
 		color: ${props => props.theme.colors.secundary};
 		-webkit-font-smoothing: antialiased;
+		::-webkit-scrollbar {
+  		width: 10px;
+		}
+		::-webkit-scrollbar-track {
+			background:  ${props => props.theme.colors.background};
+		}
+		::-webkit-scrollbar-thumb {
+			background:  ${props => props.theme.colors.quartenary};
+			&:hover {
+				background: ${props => props.theme.colors.primary};
+			}
+		}
 	}
 
 	body,

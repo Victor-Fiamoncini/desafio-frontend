@@ -4,7 +4,7 @@ interface PokemonTypeColors {
 
 export default {
 	normal: '#A8A878',
-	fightning: '#C03028',
+	fighting: '#C03028',
 	flying: '#A890F0',
 	poison: '#A040A0',
 	ground: '#E0C068',
